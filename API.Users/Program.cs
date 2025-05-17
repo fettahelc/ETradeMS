@@ -14,7 +14,12 @@ builder.AddServiceDefaults();
 var connectionString = builder.Configuration.GetConnectionString(nameof(UsersDb));
 builder.Services.AddDbContext<UsersDb>(options => options.UseSqlite(connectionString));
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(UsersDbHandler).Assembly));
-builder.Configuration.GetSection(nameof(AppSettings)).Bind(new AppSettings());
+
+// Configure AppSettings
+var appSettings = new AppSettings();
+builder.Configuration.GetSection(nameof(AppSettings)).Bind(appSettings);
+builder.Services.AddSingleton(appSettings);
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(config =>
     {

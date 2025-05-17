@@ -21,7 +21,7 @@ namespace APP.Users
         /// <summary>
         /// Token expiration time in minutes.
         /// </summary>
-        public static int ExpirationInMinutes { get; set; }
+        public int ExpirationInMinutes { get; set; }
 
         /// <summary>
         /// The secret key used to sign the JWT tokens.
